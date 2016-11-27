@@ -6,10 +6,6 @@
 //Serial debug  
 
 
-//Simple timer library for running tasks
-//#include <SimpleTimer.h>
-//SimpleTimer timer;
-
 #include <Servo.h>
 Servo myservo;  // create servo object to control a servo
 
@@ -18,13 +14,14 @@ Servo myservo;  // create servo object to control a servo
 //Pin assignment
 int ledPin = 13;
 int servoPin = 9;
-int buttonPin = 1;
+int buttonPin = A0;
 int sensorPin = 2;
-int relayPin = 5;
+int relayPin = 8;
 
 
 //Global variables
-int servoPosition = 0;  //0 - 180 degrees
+bool lightIsOn = false;
+long timeStamp = 0;     //Timestamp for slow actions
 
 
 //Simple debug function for sending message over serial
@@ -34,10 +31,7 @@ void sendDebugVariable(String title,int value){
   Serial.println(value);
 }
 
-//Example timer function for running slower than main loop
-void timerFunction(){
-   
-}
+
 
 
 // put your setup code in the setup section  --------------------------------------------------------------
@@ -56,42 +50,52 @@ void setup() {
   //Define servo pin through library
   myservo.attach(servoPin);  // attaches the servo on pin 9 to the servo object
 
-
-  //Start an extra timer loop for slow functions
-  //timer.setInterval(2000, timerFunction);
-  
 }
 
 
 // put your main code in the loop ----------------------------------------------------------------------------
 void loop() { 
-  //timer.run();
   
-  
-  //Read button state and trigger action (simple setup)
+  //Read inputs
   int buttonPinValue = digitalRead(buttonPin);
-  if (buttonPinValue == HIGH){
-    
-      servoPosition = 180;
-      
+  int sensor = analogRead(sensorPin);
+  
+
+  //Do seom logic on button press
+  if (buttonPinValue == HIGH){  
+      digitalWrite(relayPin,HIGH);
+      myservo.write(180);
       
   }
   else{
-    
-      servoPosition = 0;
+      digitalWrite(relayPin,LOW);
+      myservo.write(20);
       
   }
 
 
+  //Simple slightly inaccurate timer for stuff
+  if (millis() - timeStamp >= 2000){
 
-  //Set servos position
-  myservo.write(servoPosition);
-  
-  
+    
+    if (lightIsOn){
+      digitalWrite(ledPin,LOW);
+      lightIsOn = false;
+    }
+    else{
+      digitalWrite(ledPin,HIGH);
+      lightIsOn = true;
+    }
+  }
+
+
+
   //Debug some every loop
-  sendDebugVariable("Position debug",servoPosition);
-
-  //Some loop delay for easier debugging
+  sendDebugVariable("Position",buttonPinValue);
+  sendDebugVariable("Sensor input",sensor);
+  
+  
+  
   delay(200);
 }
 
