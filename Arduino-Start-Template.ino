@@ -57,19 +57,19 @@ void setup() {
 void loop() { 
   
   //Read inputs
-  int buttonPinValue = digitalRead(buttonPin);
+  int buttonPinValue = analogRead(buttonPin);
   int sensor = analogRead(sensorPin);
   
 
   //Do seom logic on button press
-  if (buttonPinValue == HIGH){  
+  if (buttonPinValue > 900){  //1024 maxh  
       digitalWrite(relayPin,HIGH);
-      myservo.write(180);
+      myservo.write(120);
       
   }
   else{
       digitalWrite(relayPin,LOW);
-      myservo.write(20);
+      myservo.write(60);
       
   }
 
