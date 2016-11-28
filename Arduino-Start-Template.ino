@@ -86,13 +86,15 @@ void loop() {
       digitalWrite(ledPin,HIGH);
       lightIsOn = true;
     }
+    timeStamp = millis();
   }
 
 
 
   //Debug some every loop
-  sendDebugVariable("Position",buttonPinValue);
+  sendDebugVariable("Button",buttonPinValue);
   sendDebugVariable("Sensor input",sensor);
+  sendDebugVariable("Timer",millis()-timeStamp);
   
   
   
