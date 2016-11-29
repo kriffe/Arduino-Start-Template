@@ -11,6 +11,35 @@ Simple setup for the following components
 5. Debugging
 6. Run a slow timer
 
+## Overview
+
+Setup
+```
+void setup(){
+//Define all sensors
+}
+```
+
+Fast loop (200 ms delay)
+```
+void loop(){
+
+  //Do some stuff
+
+  delay(200);)
+}
+
+```
+
+Simple slow loop (inside void loop(){})
+```
+
+if (millis() - timeStamp >= 2000){
+  //Do some stuff
+  timeStamp = millis();
+}
+```
+
 
 ## Servos
 
