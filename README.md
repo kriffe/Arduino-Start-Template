@@ -46,14 +46,20 @@ if (millis() - timeStamp >= 2000){
 A servo can be controlled with the help of the [Arduinos servo library](https://www.arduino.cc/en/Reference/Servo).
 
 Include and define
-```C
+```
 #include <Servo.h>
 Servo myservo;  // create servo object to control a servo
 ```
 
-Attach
+Attach servo (in setup)
+```
+myservo.attach(servoPin);
+```
 
-Move
+Move servo (0 - 180 degrees)
+```
+myservo.write(123);
+```
 
 ## Analog Read
 
