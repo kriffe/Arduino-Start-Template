@@ -6,7 +6,7 @@ Simple setup for the following components
 
 1. Move a servo
 2. Read an input (button/sensor)
-3. Digital output
+3. Digital output (LED/Relay)
 4. Debugging
 5. Run a slow timer
 
@@ -62,13 +62,51 @@ myservo.write(123);
 
 ## Analog Read
 
-## Buttons
+Reading of voltage input can be done with analogRead()/digtalRead()
 
-Analog read
+Define in setup()
+```
+pinMode(sensorPin,INPUT);
+```
+
+Read analog value of sensor in loop()
+```
+int sensor = analogRead(sensorPin);   =>  0 - 1024
+```
 
 
 
 
+## Digital output
+Switch output voltage between 0 and 5 V on pins.
 
-## Controll a Servo
+Define in setup()
+```
+pinMode(relayPin,OUTPUT);
+```
+
+Set inside loop()
+```
+digitalWrite(relayPin,HIGH);
+```
+
+
+## Debugging
+Use the comport and IDE console to debug your Arduino
+
+Define helpfunction for messages
+```
+void sendDebugVariable(String title,int value){
+  Serial.print(title);
+  Serial.print(" : ");
+  Serial.println(value);
+}
+```
+
+Send debug command
+```
+sendDebugVariable("Button",buttonPinValue);
+```
+
+
 
