@@ -15,7 +15,7 @@ Servo myservo;  // create servo object to control a servo
 int ledPin = 13;
 int servoPin = 9;
 int buttonPin = A0;
-int sensorPin = 2;
+int sensorPin = A1;
 int relayPin = 8;
 
 
@@ -94,7 +94,7 @@ void loop() {
   //Debug some every loop
   sendDebugVariable("Button",buttonPinValue);
   sendDebugVariable("Sensor input",sensor);
-  sendDebugVariable("Timer",millis()-timeStamp);
+  //sendDebugVariable("Timer",millis()-timeStamp);
   
   
   
