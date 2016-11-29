@@ -16,7 +16,11 @@ Simple setup for the following components
 
 A servo can be controlled with the help of the [Arduinos servo library](https://www.arduino.cc/en/Reference/Servo).
 
-Include
+Include and define
+```C
+#include <Servo.h>
+Servo myservo;  // create servo object to control a servo
+```
 
 Attach
 
