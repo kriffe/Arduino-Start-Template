@@ -25,7 +25,7 @@ void loop(){
 
   //Do some stuff
 
-  delay(200);)
+  delay(200);
 }
 
 ```
